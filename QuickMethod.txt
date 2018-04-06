@@ -1,0 +1,73 @@
+package com.sequence;
+
+import java.util.Calendar;
+
+public class QuickSrt {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		int len=15;
+		int[] arr=new int[len];
+		for(int i=0;i<len;i++)
+		{
+			//random produce1-1000
+			int t=(int)(Math.random()*100000);
+			arr[i]=t;
+		}
+	
+	    
+		//create a select class object
+		QuickSort qs=new QuickSort();
+		
+		//print time before action
+		Calendar cal=Calendar.getInstance();
+		System.out.println("before "+cal.getTime());
+		
+		qs.sort(0,arr.length-1,arr);
+		
+		Calendar cal1=Calendar.getInstance();
+		System.out.println("after "+cal1.getTime());
+		
+		
+		//print result
+		for(int i=0;i<arr.length-1;i++)
+		{
+			System.out.println(arr[i]+"");
+		}
+		
+	}
+
+}
+
+class QuickSort{
+	public void sort(int left, int right, int[] array)
+	
+	{
+		int l=left;
+		int r=right;
+		int pivot=array[(left+right) / 2];
+		int temp=0;
+			while (l<r)
+			{
+				while(array[l]<pivot) l++;
+				while(array[r]>pivot) r--;
+				
+				if(l>=r) break;
+				temp=array[1];
+				array[l]=array[r];
+				array[r]=temp;
+				
+				if(array[l]==pivot) --r;
+				if(array[r]==pivot) ++l;
+				
+			}
+			if(l==r)
+			{
+				l++;
+				r--;
+			}
+			if(left<r) sort(left,r,array);
+			if(right>l) sort(l,right,array);
+		}
+}

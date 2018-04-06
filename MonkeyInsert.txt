@@ -1,0 +1,84 @@
+
+
+package com.sequence;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class MonkeyInsert {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+			int size=5;
+			Monkey3 []monkeys=new Monkey3[size];
+			
+			InputStreamReader isr=new InputStreamReader(System.in);//CHAR Reader to RAM
+			BufferedReader br=new BufferedReader(isr);
+			
+			
+			//initialize individual monkey
+			for(int i=0;i<monkeys.length;i++)
+			{
+				System.out.println("Enter the first monkey height");
+				try {
+					String height=br.readLine();
+					//when number + String converts to String automatically
+					monkeys[i]=new Monkey3(i+1+"",Float.parseFloat(height));
+		
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			//Start sorting
+			Monkey3 oldMonkey=new Monkey3("1000",1.2f);
+			//define old monkey
+			oldMonkey.insertSort(monkeys);
+			//print 
+			oldMonkey.show(monkeys);
+		}
+	}
+
+
+
+class Monkey3{
+	private String monkeyId;
+	private float height;//class members can be used many times when objects needs. 
+	public Monkey3(String monkeyId, float height)//constructor will be used(only once) when create objects. 
+	{
+		this.monkeyId=monkeyId;
+		this.height=height;
+	}
+	
+	public void insertSort(Monkey3 []monkeys)
+	{
+		for(int i=0;i<monkeys.length;i++)//assume the first number is in sort position
+			//index 0 is in position, not involved so don't need to length-1
+		{
+			//insert the second number, record the second monkey's height
+			float insertHeight=monkeys[i].height;
+			int insertIndex=i-1;//record its index
+			String insertNo=monkeys[i].monkeyId;
+			
+			
+			while(insertIndex>=0&&monkeys[insertIndex].height>insertHeight)
+			{
+				//move to next
+				monkeys[insertIndex+1].height=monkeys[insertIndex].height;
+				monkeys[insertIndex+1].monkeyId=monkeys[insertIndex].monkeyId;
+				insertIndex--;
+			}
+			//insert id
+				monkeys[insertIndex+1].height=insertHeight;
+				monkeys[insertIndex+1].monkeyId=insertNo;
+		}
+	}
+	//show sort
+	public void show(Monkey3 []monkeys)
+	{
+		for(int i=0;i<monkeys.length;i++)
+		{
+		System.out.println("Monkey ID: "+monkeys[i].monkeyId+" height: "+monkeys[i].height);
+		}
+	}
+}	

@@ -1,0 +1,72 @@
+/*
+ * exchange position according rules
+ */
+
+package com.sequence;
+import java.util.*;
+public class SelectMethod {
+	public static void main(String[] args) {
+	
+		int len=80000;
+		int[] arr1=new int[len];
+		for(int i=0;i<len;i++)
+		{
+			//random produce1-1000
+			int t=(int)(Math.random()*100000);//produce 0-1 random
+			arr1[i]=t;
+		}
+		//int arr1[]= {1,6,0,-1,9,-19,20,-2,34,23,-9,-212};
+	    
+		//create a select class object
+		Sel select=new Sel();
+		//print time before action
+		Calendar cal=Calendar.getInstance();
+		
+		System.out.println("before "+cal.getTime());
+		select.sort(arr1);
+		Calendar cal1=Calendar.getInstance();
+		System.out.println("after "+cal1.getTime());
+		
+		
+		//print result
+		for(int i=0;i<arr1.length-1;i++)
+		{
+			System.out.println(arr1[i]+"");
+		}
+	}
+}
+
+class Sel
+{
+	public void sort(int arr[])
+	{
+	//assume the first number is smallest one
+	for(int j=0; j<arr.length-1;j++)//length-1 since the last one no value.
+	{
+		int min=arr[j];
+		//record the min number index
+		int minIndex=j;
+		
+		//if above loop did not find the min number, then go follow steps
+		
+		int temp=0;
+		for(int k=j+1;k<arr.length;k++)
+		{
+			if(min>arr[k])
+			{
+				//reposition the smallest one
+				min=arr[k];
+				minIndex=k;
+						
+			}
+		}
+		//when finish the last for loop, find the smallest one
+		//then exchange 
+			temp=arr[j];
+			arr[j]=arr[minIndex];
+			arr[minIndex]=temp;
+			
+	}
+			
+	}
+}

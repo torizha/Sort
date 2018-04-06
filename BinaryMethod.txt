@@ -1,0 +1,43 @@
+package com.find;
+
+public class Binary {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int arr[]={2,5,7,12,25,90,123,134,156,235};
+		BinaryFind bf=new BinaryFind();
+		bf.find(0, arr.length-1, 123,arr);
+	}
+
+}
+
+
+class BinaryFind
+{
+	public void find(int leftIndex, int rightIndex, int val, int[] arr)
+	{
+		//find the middle value first
+		int midIndex=(rightIndex+leftIndex)/2;
+		int midVal=arr[midIndex];
+		
+		if(rightIndex>=leftIndex)
+		{
+			
+		
+		//if demand value > midval
+		if(midVal>val)
+		{
+			//find it in left of array
+			find(leftIndex,midIndex-1,val,arr);	
+		}else if(midVal<val)
+		{
+			//find in right of array
+			find(midIndex+1,rightIndex,val,arr);
+			
+		}else if (midVal==val)
+		{
+			System.out.println("found it "+midIndex);
+		}
+		}
+	}
+}

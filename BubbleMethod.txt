@@ -1,0 +1,62 @@
+/*
+ * bubble sequence
+ */
+
+package com.sequence;
+
+public class Bubble {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int arr[]= {1,6,0,-1,9,-19,20,-2,34};
+	    //seal bubble method into class
+		//create a bubble class object
+
+		Bub bubble=new Bub();
+		bubble.sort(arr);
+		
+		int a=12;
+		bubble.test(a);
+		System.out.println(a);
+		
+		
+		//result
+		for(int i=0;i<arr.length;i++)
+		{
+			System.out.print(arr[i]+" ");
+		}
+
+	}
+
+}
+
+class Bub
+{
+	//test all process are going on outside of class
+	public void test(int a)
+	{
+		a++;
+	}
+	public void sort(int arr[])
+	{
+		int temp=0;
+		//start to sort
+		//if there are 5 numbers, then 4 external circles.
+		//the external circle decides how many times to go. 
+		for(int i=0;i<arr.length-1; i++)
+		{
+			//internal circle start to compare one by one and if 
+			//find the previous one is bigger then exchange
+			for(int j=0;j<arr.length-1-i;j++)
+			{
+				if(arr[j]>arr[j+1])
+				{
+					//change
+					temp=arr[j];
+					arr[j]=arr[j+1];
+					arr[j+1]=temp;
+				}
+			}	
+		}
+	}
+}

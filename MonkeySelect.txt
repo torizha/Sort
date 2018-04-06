@@ -1,0 +1,91 @@
+/*
+ * Select method, the key is use index (the position if array)
+ * switch the position in final stage
+ */
+
+package com.sequence;
+import java.io.*;
+public class MonkeySelect{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int size=5;
+		Monkey2 []monkeys=new Monkey2[size];
+		
+		InputStreamReader isr=new InputStreamReader(System.in);//CHAR Reader to RAM
+		BufferedReader br=new BufferedReader(isr);
+		
+		
+		//initialize individual monkey
+		for(int i=0;i<monkeys.length;i++)
+		{
+			System.out.println("Enter the first monkey height");
+			try {
+				String height=br.readLine();
+				//when number + String converts to String automatically
+				monkeys[i]=new Monkey2(i+1+"",Float.parseFloat(height));
+	
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		//Start sorting
+		Monkey2 oldMonkey=new Monkey2("1000",1.2f);
+		//define old monkey
+		oldMonkey.selectSort(monkeys);
+		//print 
+		oldMonkey.show(monkeys);
+	}
+
+}
+class Monkey2{
+	private String monkeyId;
+	private float height;//class members can be used many times when objects needs. 
+	public Monkey2(String monkeyId, float height)//constructor will be used(only once) when create objects. 
+	{
+		this.monkeyId=monkeyId;
+		this.height=height;
+	}
+	
+	public void selectSort(Monkey2 []monkeys) {
+		for(int i=0;i<monkeys.length;i++)
+		{
+			float tempHeight=0.0f;
+			String tempNo="";
+			//assume index i monkey is min
+			float minHeight=monkeys[i].height;
+			int minIndex=i;
+			
+			//compare with the second number
+			for(int j=i+1;j<monkeys.length;j++)
+			{
+				if(minHeight>monkeys[j].height)
+				{
+					//move to end 
+					minHeight=monkeys[j].height;
+					minIndex=j;
+				}
+			}
+				//then you find the first minHeight, then switch
+				//switch height
+				tempHeight=monkeys[minIndex].height;
+				monkeys[minIndex].height=monkeys[i].height;
+				monkeys[i].height=tempHeight;
+				//switch NO if minIndex !=i then switch/ if the first one is min, then not happen
+				tempNo=monkeys[minIndex].monkeyId;
+				monkeys[minIndex].monkeyId=monkeys[i].monkeyId;
+				monkeys[i].monkeyId=tempNo;
+		
+			}
+		}
+	
+	
+	//show sort
+	public void show(Monkey2 []monkeys)
+	{
+	for(int i=0;i<monkeys.length;i++)
+	{
+	System.out.println("Monkey ID: "+monkeys[i].monkeyId+" height: "+monkeys[i].height);
+	}
+	}
+}
